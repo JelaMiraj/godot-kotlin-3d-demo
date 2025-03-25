@@ -1,0 +1,338 @@
+# **Jela Miraj Creations - Software Development Standards & Practices**
+
+This document outlines the standards and practices that the Jela Miraj Creations development team adheres to. It is designed to promote collaboration, maintainability, and scalability across all projects.
+
+## **1. Core Principles**
+
+These principles guide our development process:
+
+* **Domain First:** Begin with a clear domain model that captures business concepts and rules before writing any implementation code.
+  * *Rationale:* Creates a shared language and ensures software accurately reflects business requirements.
+* **Functional First:** Favor pure functions and immutable data structures to minimize side effects and improve testability.
+  * *Rationale:* Enhances code predictability and reduces debugging complexity.
+* **Simplicity:** Prefer simple, understandable solutions over complex ones.
+  * *Rationale:* Reduces cognitive load and makes the code easier to maintain.
+* **Progressive Enhancement:** Build core functionality first, then add enhancements incrementally.
+  * *Rationale:* Allows for faster initial releases and easier adaptation to changing requirements.
+* **Defense in Depth:** Implement multiple layers of validation and security to protect against errors and attacks.
+  * *Rationale:* Minimizes the risk of critical failures and security breaches.
+* **Behavior Driven Design (BDD):** Focus on observable behaviors rather than implementation details.
+  * *Rationale:* Improves communication between developers, testers, and stakeholders.
+* **Backward Planning:** Work backward from the end goal to determine the implementation steps.
+  * *Rationale:* Ensures that implementation directly supports business outcomes.
+
+### **1.1. General Guidelines**
+
+* **Indentation:** Always use tabs for indentation.
+* **Naming:** Use camelCase for variable names.
+* **Behavior Specs:** Write behavior specs for all new functions.
+* **Explanation:** Explain your reasoning before providing code.
+* **Readability:** Focus on code readability and maintainability.
+* **Community Standards:** Prioritize using the most common library in the community.
+* **Accessibility:** When adding new features to websites, ensure they are responsive and accessible.
+
+## **2. Documentation**
+
+* **Updates:** Update relevant documentation in `/Docs` when modifying features.
+* **ReadMe:** Keep `ReadMe.md` in sync with new capabilities.
+* **Changelog:** Maintain changelog entries in `ChangeLog.md`.
+* **API Docs:** Document all public APIs with ScalaDoc or F# XML comments.
+* **Examples:** Create usage examples for complex components.
+* **Architecture Diagrams:** Update architecture diagrams when modifying system structure.
+* **Domain Language:** Maintain a glossary of domain terms in `/Docs/Domain/Glossary.md`.
+
+## **3. Architecture Decision Records (ADRs)**
+
+Create ADRs in `/Docs/Architecture Decision Records` for:
+
+* Major dependency changes.
+* Architectural pattern changes.
+* New integration patterns.
+* State management approaches.
+* AI model integrations.
+* VTuber rendering pipeline changes.
+* Concurrency model adjustments.
+
+Follow this enhanced template:
+
+```markdown
+# **Title: [ADR Title]**
+## **Status**
+[Proposed | Accepted | Rejected | Superseded]
+
+## **Context**
+[Describe the background and problem that this ADR is addressing. Why is this decision needed?]
+
+## **Decision Drivers**
+* [List the key factors influencing this decision]
+
+## **Decision**
+[Describe the architectural decision that has been made. Be clear and concise.]
+
+## **Domain Impact**
+[Describe how this decision affects the domain model]
+
+## **Consequences**
+[Describe the positive and negative consequences of the decision. What are the trade-offs?]
+### **Positive**
+* [List the positive consequences]
+### **Negative**
+* [List the negative consequences]
+
+## **Considered Options**
+[Describe alternative options that were considered and the reasons for rejecting them.]
+* [Option 1: Description and rationale for rejection]
+* [Option 2: Description and rationale for rejection]
+* [Option 3: Description and rationale for rejection]
+
+## **Implementation Notes**
+[Provide guidance on implementing this decision in F#/Scala, including any patterns to follow]
+
+## **Related ADRs**
+[List any related ADRs and their relationships to this one.]
+
+## **Review Date**
+[Date when this decision should be revisited]
+```
+# FIXME: Project Structure needs updated for Kotlin and Godot.
+
+## **4. Project Structure**
+
+Following a Java-style package organization with F#/Scala sensibilities:
+
+```text
+📦project-root/
+├── 📜build.sbt                    # Build definition
+├── 📂project/                     # Build plugins and additional settings
+├── 📂src/
+│   ├── 📂main/
+│   │   ├── 📂scala/               # Scala source code
+│   │   │   ├── 📂com/
+│   │   │   │   ├── 📂jelamiraj/
+│   │   │   │   │   ├── 📂{project-name}/
+│   │   │   │   │   │   ├── 📂domain/          # Domain models and business logic
+│   │   │   │   │   │   │   ├── 📂model/       # Core domain entities and value objects
+│   │   │   │   │   │   │   ├── 📂event/       # Domain events
+│   │   │   │   │   │   │   └── 📂service/     # Domain services
+│   │   │   │   │   │   ├── 📂application/     # Application services and use cases
+│   │   │   │   │   │   │   ├── 📂command/     # Command handlers
+│   │   │   │   │   │   │   └── 📂query/       # Query handlers
+│   │   │   │   │   │   ├── 📂infrastructure/  # External services integration
+│   │   │   │   │   │   │   ├── 📂persistence/ # Database-related code
+│   │   │   │   │   │   │   ├── 📂api/         # API clients and servers
+│   │   │   │   │   │   │   ├── 📂messaging/   # Message queues and events
+│   │   │   │   │   │   │   └── 📂generated/   # Generated code
+│   │   │   │   │   │   ├── 📂config/          # Application configuration
+│   │   │   │   │   │   ├── 📂ui/              # User interfaces
+│   │   │   │   │   │   ├── 📂util/            # Utilities and helpers
+│   │   │   │   │   │   └── 📂error/           # Error types and handling
+│   │   ├── 📂resources/           # Non-Scala resources
+│   ├── 📂test/
+│   │   ├── 📂scala/               # Test code (BDD style)
+│   │   │   ├── 📂com/
+│   │   │   │   ├── 📂jelamiraj/
+│   │   │   │   │   ├── 📂{project-name}/
+│   │   │   │   │   │   ├── 📂domain/          # Domain tests
+│   │   │   │   │   │   ├── 📂application/     # Application tests
+│   │   │   │   │   │   └── 📂infrastructure/  # Infrastructure tests
+│   │   └── 📂resources/           # Test resources
+├── 📂Docs/                        # Documentation
+│   ├── 📂Architecture Decision Records/    # Architecture Decision Records
+│   ├── 📂API/                     # API documentation
+│   ├── 📂Domain/                  # Domain model documentation and glossary
+│   └── 📂Guides/                  # User and developer guides
+└── 📂Scripts/                     # Utility scripts
+```
+
+## **5. Code Style & Patterns**
+
+### **5.1. Scala 3 / F# Style**
+
+* Use significant indentation syntax consistently in Scala 3.
+* Prefer enums and opaque types over case objects and type aliases.
+* Leverage extension methods for clean domain-specific code.
+* Use contextual abstractions judiciously.
+* Prefer given instances over implicit objects in Scala.
+* In F#, use modules to organize related functions.
+* Prefer pipelines (`|>`) for function composition in F#.
+
+### **5.2. Domain Modeling**
+
+* Always start with domain modeling as the first step in any new feature or component.
+* One type per file to maintain clear boundaries.
+* Model domain concepts as algebraic data types.
+* Express invariants directly in the type system where possible.
+* Separate commands (write) from queries (read).
+* Use value objects for immutable concepts.
+* Model domain events as first-class citizens to capture state transitions.
+* Structure domain models to reflect domain experts' language and understanding.
+* Define clear boundaries between subdomains.
+* Document the ubiquitous language in the glossary.
+
+### **5.3. Functional Patterns**
+
+* Use typeclasses for polymorphic behavior.
+* Leverage higher-order functions for behavior composition.
+* Express effects explicitly using appropriate effect types.
+* Use monadic error handling instead of exceptions.
+* Apply Railway-Oriented Programming for robust error handling.
+* Keep side effects at the edges of the system.
+* Use F# computation expressions or Scala for-comprehensions for expressive sequential operations.
+* Utilize the Reader monad (or equivalent) for dependency injection.
+* Apply functional design patterns relevant to Kyo.
+* If using Kotlin, Apply functional design patterns relevant to Arrow-KT and Arrow-Fx.
+
+### **5.4. Concurrency**
+
+* Use fine-grained concurrency with Fiber primitives.
+* Apply structured concurrency patterns.
+* Express computational workflows with for-comprehensions.
+* Avoid blocking operations in the main execution context.
+* Use appropriate concurrency primitives from Kyo.
+* If using Kotlin, Use appropriate concurrency primitives from Arrow-KT and Arrow-Fx.
+* In F#, leverage async workflows for asynchronous operations.
+* Use message-passing for inter-process communication.
+
+### **5.5. Error Handling**
+
+* Model errors as domain-specific Algebraic Data Types.
+* Follow error handling pattern in `/src/main/scala/error/ErrorHandlingPattern.scala`.
+* Provide meaningful error messages and context.
+* Use NonEmptyLists for validation errors.
+* Log errors with appropriate context and stack traces.
+* In F#, use `Result<'T, 'Error>` for error handling.
+* In Scala, use `Either[Error, A]` or a more specialized error monad.
+* Apply the "parse, don't validate" principle.
+
+### **5.6. Integration Patterns**
+
+* Generate API clients using OpenAPI Generator.
+* Use appropriate Scala or F# HTTP client libraries.
+* Place generated code in appropriate infrastructure packages.
+* Design clear integration boundaries using the Ports and Adapters pattern.
+* Implement circuit breakers for external service calls.
+* Use anti-corruption layers to translate between bounded contexts.
+* Apply proper resource management for all I/O operations.
+
+## **6. AI System Guidelines**
+
+### **6.1. LangChain4J Integration**
+
+* Wrap LangChain4J components in Scala or F# interfaces.
+* Apply the adapter pattern for Java interoperability.
+* Define clear boundaries between AI and non-AI components.
+* Cache expensive AI operations when appropriate.
+* Apply proper resource management for AI models.
+* Model AI capabilities as domain services with clear contracts.
+
+### **6.2. VTuber Rendering**
+
+* Separate rendering logic from behavior logic.
+* Use pure functional state management for animations.
+* Implement efficient asset loading and caching.
+* Apply lazy loading strategies for resource optimization.
+* Ensure thread safety in the rendering pipeline.
+* Model rendering as a pure function from state to visual output.
+
+### **6.3. Android-Specific Guidelines**
+
+* Follow reactive programming patterns for UI updates.
+* Apply proper error recovery strategies for Android components.
+* Implement graceful degradation for unreliable services.
+* Use appropriate scheduling for background tasks.
+* Apply defensive programming for system service interactions.
+* Use the Repository pattern to abstract data sources.
+
+## **7. Testing Standards**
+
+### **7.1. Test Structure**
+
+* Use MUnit, ScalaTest, or F# Expecto for testing.
+* Organize tests to mirror production code structure.
+* Apply test fixtures and factories for common test data.
+* Use property-based testing for domain logic.
+* Implement test utilities for common testing operations.
+* Apply the Given-When-Then pattern for BDD-style tests.
+
+### **7.2. Test Requirements**
+
+* BDD (Behavior Driven Development) Behavior Specs required for business logic.
+* Integration tests for API endpoints and external services.
+* End-to-End (E2E) tests for critical user flows.
+* Performance tests for resource-intensive operations.
+* Fuzzing tests for parsing and input validation.
+* Test domain models independently of their infrastructure.
+
+### **7.3. Testing AI Components**
+
+* Use deterministic prompts for testing LLM interactions.
+* Mock expensive AI operations in unit tests.
+* Apply golden master testing for complex AI behaviors.
+* Test fallback mechanisms for AI failures.
+* Implement regression test suite for AI capabilities.
+* Compare AI outputs against known good examples.
+
+## **8. Performance Considerations**
+
+* Optimize only with measured evidence.
+* Profile before optimizing.
+* Document performance characteristics of critical components.
+* Consider resource limitations of target platforms.
+* Apply appropriate caching strategies.
+* Use benchmarking tools to establish baselines.
+* Apply lazy evaluation patterns where appropriate.
+
+## **9. Security Guidelines**
+
+* Apply least privilege principle for all components.
+* Validate all inputs at trust boundaries.
+* Apply proper authentication and authorization.
+* Secure sensitive data in transit and at rest.
+* Conduct regular security reviews.
+* Use capability-based security models where appropriate.
+* Apply secure coding practices specific to F# and Scala.
+
+## **10. Deployment & Operations**
+
+* Design for observability with appropriate metrics and logging.
+* Implement health checks for all services.
+* Apply graceful shutdown procedures.
+* Document operational procedures.
+* Create "runbooks" for common failure scenarios.
+* Implement feature flags for risky changes.
+* Use blue/green or canary deployment strategies.
+* Apply infrastructure as code principles.
+
+## **11. Troubleshooting Guide**
+
+* **Common Issues and Solutions:**
+  * Initialization issues: Check configuration and dependency injection setup.
+  * Performance problems: Use profiling tools to identify bottlenecks.
+  * Memory leaks: Review resource management and disposal patterns.
+  * Library conflicts: Check for version incompatibilities.
+
+* **Debugging Strategies for AI Components:**
+  * Log prompt inputs and outputs for debugging.
+  * Test prompts in isolation to verify behavior.
+  * Use simpler models during development.
+  * Implement circuit breakers for unstable AI services.
+
+* **Logs Interpretation Guide:**
+  * Use structured logging for machine-readable logs.
+  * Include correlation IDs to trace requests across services.
+  * Log at appropriate levels (DEBUG, INFO, WARN, ERROR).
+  * Include context information in log messages.
+
+* **Performance Troubleshooting:**
+  * Use flame graphs to identify CPU hotspots.
+  * Profile memory allocation patterns.
+  * Monitor GC behavior for pressure signs.
+  * Check for N+1 query problems in data access.
+
+* **Tools and Scripts for Diagnostics:**
+  * Use JVM profiling tools for Scala applications.
+  * Apply F# analysis tools for F# codebases.
+  * Use standard monitoring tools like Prometheus and Grafana.
+  * Implement custom health check endpoints for service status.
+
+Remember: We build systems that are understandable, maintainable, and reliable. Favor clarity over cleverness, simplicity over premature optimization, and domain accuracy over technical elegance.
