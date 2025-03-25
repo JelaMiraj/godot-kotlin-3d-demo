@@ -5,7 +5,7 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version project.property("kotlinVersion")
+    kotlin("jvm") version System.getProperty("kotlin.version", "2.1.10")
     id("com.utopia-rise.godot-kotlin-jvm") version "0.12.1-4.4"
 }
 
