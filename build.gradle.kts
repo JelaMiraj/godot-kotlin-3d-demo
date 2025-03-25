@@ -1,7 +1,11 @@
-val kotlinVersion: String by project // Make sure this is defined in gradle.properties
+// val kotlinVersion: String by project // Make sure this is defined in gradle.properties
+
+buildscript {
+    val kotlinVersion = project.property("kotlin.version")
+}
 
 plugins {
-    kotlin("jvm") version kotlinVersion // Remove the string interpolation
+    kotlin("jvm") version project.property("kotlinVersion")
     id("com.utopia-rise.godot-kotlin-jvm") version "0.12.1-4.4"
 }
 
