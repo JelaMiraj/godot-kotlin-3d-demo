@@ -21,7 +21,6 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
 }
 
-
 godot {
     registrationFileBaseDir.set(projectDir.resolve("scripts"))
     isRegistrationFileHierarchyEnabled.set(true)
