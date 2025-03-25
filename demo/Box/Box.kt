@@ -4,15 +4,23 @@ import Player.Coin.Coin
 import godot.*
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
+import godot.api.AudioStreamPlayer3D
+import godot.api.CollisionShape3D
+import godot.api.ResourceLoader
+import godot.api.Node
+import godot.api.PackedScene
+import godot.api.RigidBody3D
 import godot.core.Vector3
 import godot.coroutines.await
 import godot.coroutines.awaitLoadAs
 import godot.coroutines.awaitMainThread
 import godot.coroutines.godotCoroutine
-import godot.extensions.getNodeAs
-import godot.extensions.instantiateAs
+import godot.extension.getNodeAs
+import godot.extension.instantiateAs
 import godot.global.GD
 import shared.Damageable
+
+import Box.DestroyedBox
 
 const val COIN_SCENE_PATH = "res://demo/Player/Coin/Coin.tscn"
 const val COINS_COUNT = 5
@@ -25,8 +33,8 @@ class Box : RigidBody3D(), Damageable {
 
     @RegisterFunction
     override fun _ready() {
-        destroySound = getNodeAs("DestroySound")!!
-        collisionShape = getNodeAs("CollisionShape3d")!!
+        destroySound = this.getNodeAs("DestroySound")!!
+        collisionShape = this.getNodeAs("CollisionShape3d")!!
     }
 
     @RegisterFunction

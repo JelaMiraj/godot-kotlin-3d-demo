@@ -20,8 +20,8 @@ import godot.annotation.RegisterFunction
 import godot.annotation.RegisterProperty
 import godot.core.Vector3
 import godot.core.asStringName
-import godot.extensions.instantiateAs
-import godot.extensions.loadAs
+import godot.extension.instantiateAs
+import godot.extension.loadAs
 import shared.Damageable
 
 @RegisterClass

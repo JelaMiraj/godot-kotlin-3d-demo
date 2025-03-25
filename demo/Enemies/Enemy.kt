@@ -10,8 +10,8 @@ import godot.annotation.RegisterProperty
 import godot.coroutines.await
 import godot.coroutines.awaitMainThread
 import godot.coroutines.godotCoroutine
-import godot.extensions.instantiateAs
-import godot.extensions.loadAs
+import godot.extension.instantiateAs
+import godot.extension.loadAs
 import shared.Damageable
 
 abstract class Enemy : RigidBody3D(), Damageable {

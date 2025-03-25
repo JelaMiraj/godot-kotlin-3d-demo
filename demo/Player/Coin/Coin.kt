@@ -12,7 +12,7 @@ import godot.annotation.RegisterProperty
 import godot.core.Callable
 import godot.core.StringName
 import godot.core.Vector3
-import godot.extensions.getNodeAs
+import godot.extension.getNodeAs
 import godot.global.GD
 import kotlin.random.Random
 
