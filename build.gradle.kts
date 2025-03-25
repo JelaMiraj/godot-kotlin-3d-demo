@@ -1,7 +1,7 @@
 val kotlinVersion: String by project // Make sure this is defined in gradle.properties
 
 plugins {
-    kotlin("jvm") version "$kotlinVersion" // Must stay at 2.1.10 for Godot-Kotlin
+    kotlin("jvm") version kotlinVersion // Remove the string interpolation
     id("com.utopia-rise.godot-kotlin-jvm") version "0.12.1-4.4"
 }
 
