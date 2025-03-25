@@ -1,8 +1,4 @@
-// val kotlinVersion: String by project // Make sure this is defined in gradle.properties
-
-buildscript {
-    val kotlinVersion = project.property("kotlin.version")
-}
+val kotlinVersion = project.property("kotlin.version").toString()
 
 plugins {
     kotlin("jvm") version System.getProperty("kotlin.version", "2.1.10")
